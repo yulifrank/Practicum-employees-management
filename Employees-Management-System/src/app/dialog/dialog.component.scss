@@ -1,0 +1,97 @@
+.dialog-title {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.confirmation-text {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.mat-dialog-action {
+    display: flex;
+    justify-content: center;
+}
+
+.cancel-button, .confirm-button {
+    padding: 7px 14px;
+    border: 2px solid #007bff;
+    background-color: transparent;
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s; /* החלפת צבעים ועיצוב עם מעבר העכבר */
+    border-radius: 7px; /* קצוות מעט מעוגלים */
+}
+
+.cancel-button:hover, .confirm-button:hover {
+    color: #0056b3;
+    border-color: #0056b3;
+    background-color: rgba(0, 123, 255, 0.1); /* עיניין קל בעת הבהוב */
+}
+
+.cancel-button:focus, .confirm-button:focus {
+    outline: none;
+    color: #003d7f;
+    border-color: #003d7f;
+}
+
+.confirm-button {
+    margin-left: 10px;
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.confirm-button:hover {
+    color: #218838;
+    border-color: #218838;
+    background-color: rgba(40, 167, 69, 0.1); 
+}
+
+.confirm-button:focus {
+    outline: none;
+    color: #1e7e34;
+    border-color: #1e7e34;
+}
+.cancel-button, .confirm-button {
+    padding: 7px 14px;
+    border: 2px solid #29a6a2; /* צבע המסגרת */
+    background-color: transparent;
+    color: #29a6a2; /* צבע הטקסט */
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s; /* החלפת צבעים ועיצוב עם מעבר העכבר */
+    border-radius: 7px; /* קצוות מעט מעוגלים */
+}
+
+.cancel-button:hover, .confirm-button:hover {
+    color: #0f6e6b; /* גוון הטקסט בעת העכבר */
+    border-color: #0f6e6b; /* צבע המסגרת בעת העכבר */
+    background-color: rgba(41, 166, 162, 0.1); /* עיניין קל בעת הבהוב */
+}
+
+.cancel-button:focus, .confirm-button:focus {
+    outline: none;
+    color: #004d4a; /* גוון הטקסט בעת קיפול הכפתור */
+    border-color: #004d4a; /* צבע המסגרת בעת קיפול הכפתור */
+}
+
+.confirm-button {
+    margin-left: 10px;
+    color: #00665f; /* צבע הטקסט של הכפתור המאושר */
+    border-color: #00665f; /* צבע המסגרת של הכפתור המאושר */
+}
+
+.confirm-button:hover {
+    color: #004d4a; /* גוון הטקסט של הכפתור המאושר בעת העכבר */
+    border-color: #004d4a; /* צבע המסגרת של הכפתור המאושר בעת העכבר */
+    background-color: rgba(41, 166, 162, 0.1); /* עיניין קל בעת הבהוב */
+}
+
+.confirm-button:focus {
+    outline: none;
+    color: #003533; /* גוון הטקסט של הכפתור המאושר בעת קיפול הכפתור */
+    border-color: #003533; /* צבע המסגרת של הכפתור המאושר בעת קיפול הכפתור */
+}

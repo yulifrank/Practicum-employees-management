@@ -1,0 +1,54 @@
+  <!-- טבלת התפקידים -->
+  <div class="employee-positions">
+    <button mat-button class="custom-button" (click)="openAddPositionDialog()">
+        <mat-icon>add</mat-icon>
+        הוספת תפקיד  
+    </button>
+    <!-- <div class="search-container">
+      <input class="mat-input" (keyup)="applyFilter($event)" placeholder="סינון">
+      <mat-icon class="search-icon">search</mat-icon>
+    </div> -->
+
+    <div class="mat-table">
+      <mat-table [dataSource]="employeePositions" class="mat-elevation-z8 custom-table">
+        <!-- Position Name Column -->
+        <ng-container matColumnDef="positionName">
+          <mat-header-cell *matHeaderCellDef>שם התפקיד</mat-header-cell>
+          <mat-cell *matCellDef="let position">{{ position.position.positionName }}</mat-cell>
+        </ng-container>
+        
+        <!-- Entry Date Column -->
+        <ng-container matColumnDef="entryDate">
+          <mat-header-cell *matHeaderCellDef>תאריך כניסה</mat-header-cell>
+          <mat-cell *matCellDef="let position">{{ position.entryDate|date }}</mat-cell>
+        </ng-container>
+        
+        <!-- Is Management Column -->
+        <ng-container matColumnDef="isManagement">
+          <mat-header-cell *matHeaderCellDef>סוג תפקיד</mat-header-cell>
+          <mat-cell *matCellDef="let position">{{ position.isManagement ? 'ניהולי' : 'רגיל' }}</mat-cell>
+        </ng-container>
+        
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>עריכה/מחיקה</mat-header-cell>
+          <mat-cell *matCellDef="let position">
+            <button mat-icon-button class="custom-butt" (click)="deletePosition(position)">
+              <mat-icon>delete</mat-icon>
+            
+            </button>
+               <button mat-icon-button class="custom-butt" (click)="editPosition(position)"> 
+              <mat-icon>edit</mat-icon>
+            </button>
+
+          </mat-cell>
+        </ng-container>
+        
+        <!-- Header Row -->
+        <mat-header-row *matHeaderRowDef="['positionName', 'entryDate', 'isManagement', 'actions']"></mat-header-row>
+        
+        <!-- Data Rows -->
+        <mat-row *matRowDef="let position; columns: ['positionName', 'entryDate', 'isManagement', 'actions']"></mat-row>
+      </mat-table>
+    </div>
+  </div>

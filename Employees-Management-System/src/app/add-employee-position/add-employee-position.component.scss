@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    direction: rtl;
+    
+}
+
+.container form {
+    width: 70%;
+}
+
+.form-field {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    margin-bottom: 5px;
+}
+
+.form-field input,
+.form-field select,
+.mat-form-field {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #29a6a2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #36807d;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}

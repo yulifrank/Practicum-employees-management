@@ -1,0 +1,58 @@
+<mat-toolbar >
+  <mat-toolbar-row>
+   <div class="act"> <span class="spacer"></span>
+    <button mat-button class="custom-button"  class="custom-button1"(click)="openAddEmployeeDialog()">
+      <mat-icon>add</mat-icon>
+      הוספת עובד לעסק
+    </button>
+    <span class="spacer"></span>
+    <button mat-icon-button class="custom-button"  class="custom-button1" (click)="downloadData()">
+      <mat-icon>download</mat-icon>
+      הורדה לאקסל
+    </button></div>
+    <div class="search-container">
+      <div class="search">
+        <input class="mat-input" (keyup)="applyFilter($event)" placeholder="סינון">
+      </div>
+      <mat-icon>search</mat-icon>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+<div class="mat-table-container">
+  <div class="table-header">
+  </div>
+  <table mat-table [dataSource]="employees" class="mat-elevation-z8 custom-table">
+    <ng-container  matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>שם פרטי</th>
+      <td  mat-cell *matCellDef="let employee">{{employee.firstName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>שם משפחה</th>
+      <td mat-cell *matCellDef="let employee">{{employee.lastName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="identity">
+      <th mat-header-cell *matHeaderCellDef>תעודת זהות</th>
+      <td mat-cell *matCellDef="let employee">{{employee.identity}}</td>
+    </ng-container>
+    <ng-container matColumnDef="birthdate">
+      <th mat-header-cell *matHeaderCellDef>תאריך לידה</th>
+      <td mat-cell *matCellDef="let employee">{{employee.birthdate|date}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>פעולות</th>
+      <td mat-cell *matCellDef="let employee">
+        <button mat-icon-button class="custom-button edit-button" (click)="editEmployee(employee.code)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button class="custom-button delete-button" (click)="deleteEmployee(employee)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
+</div>

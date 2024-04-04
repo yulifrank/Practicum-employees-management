@@ -1,0 +1,8 @@
+
+<mat-dialog-content>
+    <p class="confirmation-text"  *ngIf="errorMessage">{{errorMessage}}</p>
+</mat-dialog-content>
+<mat-dialog-actions class="mat-dialog-action">
+    <button mat-button class="mat-button cancel-button" (click)="onCancelClick()">ביטול</button>
+    <button mat-button class="mat-button confirm-button" (click)="onConfirmClick()">אישור</button>
+</mat-dialog-actions>

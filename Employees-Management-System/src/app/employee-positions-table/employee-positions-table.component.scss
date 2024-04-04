@@ -1,0 +1,72 @@
+
+    
+    .custom-button {
+        
+
+  background-color: #a19e9e68;
+  color: #000000;
+  margin-top: 5%;
+  margin-left: 90%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+width: 23%;
+margin-bottom: 8%;
+    
+    }
+    
+    .custom-button:hover {
+        background-color:  #40434362; /* ירוק כהה */
+    }
+    .custom-butt{
+        background-color: #e0dfdf20; /* ירוק */
+        color: #29a6a2;  
+        margin: 4%;
+    }
+    .mat-table{
+margin-top: 0%;
+    }
+    
+    .search-container {
+        display: flex;
+        align-items: center; /* מיושר את האיקון באמצע באנכית */
+        justify-content: center; /* מיושר את האיקון באמצע לאורך */
+        border-radius: 25px; /* רדיוס מסגרת עגולה */
+        background-color: #f0f0f0; /* צבע רקע */
+        padding: 5px 10px; /* ריווח בין הטקסט למסגרת */
+        width: 12%; /* רוחב גדול יותר */
+        margin: auto;
+        margin-bottom: 1%;
+        margin-left: 23%;
+        margin-top: 3%;
+        
+      }
+      .search-container:hover {
+        background-color: #96979747;
+        color: #0f756c;
+      }
+      .mat-input {
+        width: 70%; /* רוחב גדול יותר */
+        padding-right: 3px; /* כדי להשאיר מקום לאייקון */
+        border: none; /* מסיר גבול סטנדרטי */
+        outline: none; /* מסיר קווים סטנדרטיים ברגע שה־input ב־focus */
+        font-size: 16px; /* גודל הטקסט */
+      }
+      
+      .search-icon {
+        right: 10px; /* מיושר לצד הימני של המסגרת */
+        color: gray; /* צבע האייקון */
+        cursor: pointer; /* סמל עכבר כשנכנסים לעלית האייקון */
+        font-size: 24px; /* גודל האייקון */
+      }
+      .search-icon:hover {
+        right: 10px; /* מיושר לצד הימני של המסגרת */
+        color: rgb(26, 91, 94); /* צבע האייקון */
+        cursor: pointer; /* סמל עכבר כשנכנסים לעלית האייקון */
+        font-size: 24px; /* גודל האייקון */
+      }

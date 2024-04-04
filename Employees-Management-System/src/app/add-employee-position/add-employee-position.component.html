@@ -1,0 +1,38 @@
+<div class="container">
+    <form [formGroup]="employeePositionForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <mat-form-field appearance="fill">
+                <mat-label>בחר תפקיד</mat-label>
+                <mat-select formControlName="positionId">
+                    <mat-option *ngFor="let position of availablePositions" [value]="position.positionId">
+                        {{ position.positionName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <mat-form-field appearance="fill">
+                <mat-label>תאריך כניסה לתפקיד</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="entryDate" id="entryDate" placeholder="תאריך כניסה לעבודה">
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            </mat-form-field>
+            <mat-error *ngIf="employee && employeePositionForm.get('entryDate').invalid && employeePositionForm.get('entryDate').touched">
+                תאריך הכניסה חייב להיות אחרי תאריך הכניסה לעבודה ({{ employee.employmentStartDate | date:'dd/MM/yyyy' }}).
+            </mat-error>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field class="form-field" appearance="fill">
+                <mat-label>ניהולי/רגיל</mat-label>
+                <mat-select formControlName="isManagement" placeholder="ניהולי/רגיל">
+                    <mat-option [value]="true">ניהולי</mat-option>
+                    <mat-option [value]="false">רגיל</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button type="submit" [disabled]="employeePositionForm.invalid">הוסף עמדה</button>
+    </form>
+</div>
