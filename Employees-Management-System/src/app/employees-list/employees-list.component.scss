@@ -91,14 +91,10 @@
   font-size: 16px;
   transition-duration: 0.4s;
   cursor: pointer;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.075);
   border-radius: 5px;
   margin-right: 10%;
-  background-color: rgb(147, 233, 233);
-}
-
-.custom-button:hover {
-  background-color: #c9e3e2;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .mat-table-container::-webkit-scrollbar {
@@ -127,7 +123,7 @@
 }
 
 .mat-toolbar {
-  background-color: #dddcdd70; /* צבע רקע */
+  background: linear-gradient(to right, #00ffd0, #ff74a09d, #93fff2); /* צבע gradient */
   color: white; /* צבע טקסט */
   margin-bottom: 2%;
   direction: rtl;
@@ -142,7 +138,7 @@
   align-items: center;
   margin-right: 2%;
   margin-left: 3%;
-  background-color: #9999998f;
+  background-color: #b0b0b0;
   border-radius: 25px;
   padding: 4px 7px;
   width: 12%;
@@ -178,7 +174,7 @@ display: flex;
 }
 
 .custom-button:hover, .butt:hover, .custom-button1:hover{
-  background-color: #1bc5df4f;
+  background-color: #6d6d6d75;
 }
 
 .spacer{
@@ -191,4 +187,12 @@ display: flex;
 }
 .act{
   margin-left: 30%;
+}
+
+
+.mat-icon {
+  color: rgba(0, 0, 0, 0.492) !important; /* !important כדי להעדיף על CSS קיים */
+}
+.mat-icon:hover {
+  color: rgb(255, 255, 255) !important; /* !important כדי להעדיף על CSS קיים */
 }

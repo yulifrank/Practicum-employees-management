@@ -17,18 +17,19 @@ import * as XLSX from 'xlsx'; // ייבוא ספריית xlsx לייצוא לק�
 import { saveAs } from 'file-saver'; // ייבוא פונקציה saveAs מספריית file-saver
 import { DialogComponent } from '../dialog/dialog.component';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { MatTooltip } from '@angular/material/tooltip';
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [ MatToolbarModule, MatIconModule, MatFormFieldModule, MatTableModule,CommonModule ],
+  imports: [MatToolbarModule, MatIconModule, MatFormFieldModule, MatTableModule, CommonModule, MatTooltip],
   templateUrl: './employees-list.component.html',
-  styleUrls: ['./employees-list.component.scss'] 
+  styleUrls: ['./employees-list.component.scss']
 })
 export class EmployeesListComponent implements OnInit {
-  columnsToDisplay: string[] = ['firstName', 'lastName', 'identity', 'birthdate','actions' ];
+  columnsToDisplay: string[] = ['firstName', 'lastName', 'identity', 'birthdate', 'actions'];
   employees: MatTableDataSource<Employee>;
 
-  constructor( private dialog: MatDialog,private employeeService:EmployeeService,private router: Router) {}
+  constructor(private dialog: MatDialog, private employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -36,7 +37,7 @@ export class EmployeesListComponent implements OnInit {
 
   getEmployees(): void {
     this.employeeService.getEmployees()
-    
+
       .subscribe(employees => {
         this.employees = new MatTableDataSource<Employee>(employees);
       });
@@ -44,7 +45,7 @@ export class EmployeesListComponent implements OnInit {
   openAddEmployeeDialog(): void {
     const dialogRef = this.dialog.open(AddEmployeeComponent, {
       width: '50%',
-      height:'70%',
+      height: '70%',
     });
 
     dialogRef.afterClosed().subscribe(formData => {
@@ -64,9 +65,9 @@ export class EmployeesListComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '350px',
-      data: { errorMessage: 'האם ברצונך למחוק את ?'+employee.firstName+" "+employee.lastName }
+      data: { errorMessage: 'האם ברצונך למחוק את ?' + employee.firstName + " " + employee.lastName }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
         this.employeeService.deleteEmployee(employee.code)
@@ -98,7 +99,7 @@ export class EmployeesListComponent implements OnInit {
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
 
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const blob = new Blob([excelBuffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'});
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
     saveAs(blob, 'employees.xlsx');
   }
 }

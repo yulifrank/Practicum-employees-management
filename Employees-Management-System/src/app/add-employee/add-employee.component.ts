@@ -13,14 +13,34 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Route, Router } from '@angular/router';
+import { MatIcon, MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatNativeDateModule, 
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatNativeDateModule,
     MatCheckboxModule,
-    MatFormFieldModule, MatDatepickerModule, MatSelectModule ],
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatDividerModule,
+    MatStepperModule
+],
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss']
 })
@@ -31,8 +51,14 @@ export class AddEmployeeComponent {
   @ViewChild('picker1') picker1: MatDatepicker<Date>;
   @ViewChild('picker2') picker2: MatDatepicker<Date>;
 
-  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService, private dialog: MatDialog,private router:Router) {}
+  constructor(private matIconRegistry: MatIconRegistry, private sanitizer: DomSanitizer,private formBuilder: FormBuilder, private employeeService: EmployeeService, private dialog: MatDialog, private router: Router) {
 
+
+    this.matIconRegistry.addSvgIcon(
+      'custom_icon',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/custom_icon.svg')
+    );
+  }
   ngOnInit(): void {
     this.employeeForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -57,38 +83,38 @@ export class AddEmployeeComponent {
     const ageDifferenceMs = Date.now() - birthdate.getTime();
     const ageDate = new Date(ageDifferenceMs);
     const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-    
+
     if (age < minAge) {
       this.employeeForm.get('birthdate')?.setErrors({ tooYoung: true });
     } else {
       this.employeeForm.get('birthdate')?.setErrors(null);
     }
   }
-  
+
   dateValidator() {
     const startDate = new Date(this.employeeForm.get('employmentStartDate')?.value);
     const endDate = new Date(this.employeeForm.get('birthdate')?.value);
-    
+
     if (startDate < endDate) {
       this.employeeForm.get('employmentStartDate')?.setErrors({ invalidStartDate: true });
     } else {
       this.employeeForm.get('employmentStartDate')?.setErrors(null);
     }
   }
-  
+
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '20%',
       data: { errorMessage: 'האם הינך בטוח רוצה להוסיף את עובד זה?' }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.submitForm();
       }
     });
   }
-  
+
   submitForm() {
     if (this.employeeForm.valid) {
       this.employeeService.addEmployee({
@@ -103,9 +129,20 @@ export class AddEmployeeComponent {
           console.log('The data was successfully sent to the server:', response);
           this.dialog.closeAll(); // Close all open dialogs
 
-          this.router.navigate(['/edit-employee',response.code])      },        
-        error => console.error('Error sending data to the service:', error)
-      );
+          this.router.navigate(['/edit-employee', response.code])
+        },
+        error => {console.error('Error sending data to the service:', error)
+        const dialogRef = this.dialog.open(DialogComponent, {
+          width: '20%',
+          data: { errorMessage: 'לא ניתן להכניס עובד זה!' }
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          this.dialog.closeAll(); // Close all open dialogs
+
+      });
+    
+    })
     } else {
       this.markFormGroupTouched(this.employeeForm);
     }
@@ -119,6 +156,12 @@ export class AddEmployeeComponent {
       }
     });
   }
+
+  goBack(){
+    this.dialog.closeAll(); // Close all open dialogs
+
+  }
+
 }
 
 

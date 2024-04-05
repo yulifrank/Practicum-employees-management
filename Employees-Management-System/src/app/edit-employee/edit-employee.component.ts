@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { EmployeePositionsTableComponent } from '../employee-positions-table/employee-positions-table.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
@@ -26,17 +27,17 @@ import { EmployeePositionsTableComponent } from '../employee-positions-table/emp
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
- EmployeePositionsTableComponent ,
+    EmployeePositionsTableComponent,
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
     MatDatepickerModule,
     MatSelectModule,
-
+    MatTooltipModule,
     MatNativeDateModule,
-     MatTableModule,
-     CommonModule,
-     MatIconModule,
+    MatTableModule,
+    CommonModule,
+    MatIconModule,
   ],
 
   templateUrl: './edit-employee.component.html',
@@ -58,15 +59,15 @@ export class EditEmployeeComponent implements OnInit {
     const employeeId = +this.route.snapshot.params['id']; // Converting id to number
     this.loadEmployee(employeeId);
   }
-  
+
   loadEmployee(employeeId: number): void {
     this.employeeService.getEmployeeById(employeeId).subscribe(employee => {
       this.editingEmployee = employee;
       this.employeeForm = this.formBuilder.group({
-        firstName: [this.editingEmployee.firstName, [Validators.required, ]],
+        firstName: [this.editingEmployee.firstName, [Validators.required,]],
         lastName: [this.editingEmployee.lastName, [Validators.required,]],
         identity: [this.editingEmployee.identity, [Validators.required, Validators.pattern('^[0-9]{9}$')]],
-      
+
         birthdate: [this.formatDate(this.editingEmployee.birthdate), Validators.required],
         gender: [this.editingEmployee.gender, Validators.required],
         employmentStartDate: [this.formatDate(this.editingEmployee.employmentStartDate), Validators.required],
@@ -77,38 +78,38 @@ export class EditEmployeeComponent implements OnInit {
       this.employeeForm.get('employmentStartDate').valueChanges.subscribe(() => {
         this.dateValidator();
       });
-    
+
       this.employeeForm.get('birthdate').valueChanges.subscribe(() => {
         this.ageValidator(18);
       });
     });
   }
-  
 
 
-ageValidator(minAge: number) {
-  const birthdate = new Date(this.employeeForm.get('birthdate')?.value);
-  const ageDifferenceMs = Date.now() - birthdate.getTime();
-  const ageDate = new Date(ageDifferenceMs);
-  const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-  
-  if (age < minAge) {
-    this.employeeForm.get('birthdate')?.setErrors({ tooYoung: true });
-  } else {
-    this.employeeForm.get('birthdate')?.setErrors(null);
+
+  ageValidator(minAge: number) {
+    const birthdate = new Date(this.employeeForm.get('birthdate')?.value);
+    const ageDifferenceMs = Date.now() - birthdate.getTime();
+    const ageDate = new Date(ageDifferenceMs);
+    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+    if (age < minAge) {
+      this.employeeForm.get('birthdate')?.setErrors({ tooYoung: true });
+    } else {
+      this.employeeForm.get('birthdate')?.setErrors(null);
+    }
   }
-}
 
-dateValidator() {
-  const startDate = new Date(this.employeeForm.get('employmentStartDate')?.value);
-  const endDate = new Date(this.employeeForm.get('birthdate')?.value);
-  
-  if (startDate < endDate) {
-    this.employeeForm.get('employmentStartDate')?.setErrors({ invalidStartDate: true });
-  } else {
-    this.employeeForm.get('employmentStartDate')?.setErrors(null);
+  dateValidator() {
+    const startDate = new Date(this.employeeForm.get('employmentStartDate')?.value);
+    const endDate = new Date(this.employeeForm.get('birthdate')?.value);
+
+    if (startDate < endDate) {
+      this.employeeForm.get('employmentStartDate')?.setErrors({ invalidStartDate: true });
+    } else {
+      this.employeeForm.get('employmentStartDate')?.setErrors(null);
+    }
   }
-}
   openMessageDialogSubmit(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '350px',

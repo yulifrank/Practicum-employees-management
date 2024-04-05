@@ -1,67 +1,81 @@
-<form [formGroup]="employeeForm" (ngSubmit)="openConfirmationDialog()" class="form">
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>שם פרטי</mat-label>
-    <input matInput formControlName="firstName" placeholder="הזן שם פרטי" class="custom-input">
-    <mat-error *ngIf="employeeForm.get('firstName')?.hasError('required') && employeeForm.get('firstName')?.touched">
-      שם פרטי הוא שדה חובה
-    </mat-error>
-  </mat-form-field>
+<div class="all-page">
+  <button mat-button class="white" (click)="goBack()" matTooltip="חזור אחורה">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2>הוספת עובד</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="openConfirmationDialog()" class="form">
+    <mat-divider></mat-divider>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>שם משפחה</mat-label>
-    <input matInput formControlName="lastName" placeholder="הזן שם משפחה" class="custom-input">
-    <mat-error *ngIf="employeeForm.get('lastName')?.hasError('required') && employeeForm.get('lastName')?.touched">
-      שם משפחה הוא שדה חובה
-    </mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field" color="accent">
+      <mat-label>שם פרטי</mat-label>
+      <input matInput formControlName="firstName" placeholder="הזן שם פרטי" class="custom-input">
+      <mat-error *ngIf="employeeForm.get('firstName')?.hasError('required') && employeeForm.get('firstName')?.touched">
+        שם פרטי הוא שדה חובה
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>תעודת זהות</mat-label>
-    <input matInput formControlName="identity" placeholder="הזן תעודת זהות" class="custom-input">
-    <mat-error *ngIf="employeeForm.get('identity')?.hasError('required') && employeeForm.get('identity')?.touched">
-      תעודת זהות היא שדה חובה וחייבת להכיל לפחות 9 תווים
-    </mat-error>
-    <mat-error *ngIf="employeeForm.get('identity')?.hasError('pattern') && employeeForm.get('identity')?.touched">
-      תעודת הזהות חייבת להכיל מספרים בלבד ולהכיל בין 9 ל-11 תווים
-    </mat-error>
-  </mat-form-field>
-  
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>מגדר</mat-label>
-    <mat-select formControlName="gender" placeholder="בחר מגדר" class="custom-input">
-      <mat-option [value]="0">זכר</mat-option>
-      <mat-option [value]="1">נקבה</mat-option>
-    </mat-select>
-    <mat-error *ngIf="employeeForm.get('gender')?.hasError('required') && employeeForm.get('gender')?.touched">
-      המגדר הוא שדה חובה
-    </mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field" color="accent">
+      <mat-label>שם משפחה</mat-label>
+      <input matInput formControlName="lastName" placeholder="הזן שם משפחה" class="custom-input">
+      <mat-error *ngIf="employeeForm.get('lastName')?.hasError('required') && employeeForm.get('lastName')?.touched">
+        שם משפחה הוא שדה חובה
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>תאריך לידה</mat-label>
-    <input matInput [matDatepicker]="picker1" formControlName="birthdate" placeholder="בחר תאריך לידה" class="custom-input">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-    <mat-error *ngIf="employeeForm.get('birthdate')?.hasError('required') && employeeForm.get('birthdate')?.touched">
-      תאריך לידה הוא שדה חובה
-    </mat-error>
-    <mat-error *ngIf="employeeForm.get('birthdate')?.hasError('tooYoung') && employeeForm.get('birthdate')?.touched">
-      העובד חייב להיות מעל גיל 18
-    </mat-error>
-    <mat-error *ngIf="employeeForm.get('employmentStartDate')?.hasError('invalidStartDate') && employeeForm.get('employmentStartDate')?.touched">
-      תאריך התחלת העסקה חייב להיות לאחר מתאריך הלידה
-    </mat-error>
-  </mat-form-field>
-  
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>תאריך תחילת העסקה</mat-label>
-    <input matInput [matDatepicker]="picker2" formControlName="employmentStartDate" placeholder="תאריך תחילת העסקה" class="custom-input">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-    <mat-error *ngIf="employeeForm.get('employmentStartDate')?.hasError('required') && employeeForm.get('employmentStartDate')?.touched">
-      תאריך תחילת העסקה הוא שדה חובה
-    </mat-error>
-  </mat-form-field>
-  
-  <button mat-raised-button color="primary" type="submit" [disabled]="employeeForm.invalid" class="submit-btn">שלח</button>
-</form>
+    <mat-form-field matTooltip="מספר תז חייב להכיל ספרות בלבד" appearance="fill" class="form-field" color="accent">
+      <mat-label>תעודת זהות</mat-label>
+      <input  matInput formControlName="identity" placeholder="הזן תעודת זהות" class="custom-input">
+      <mat-error *ngIf="employeeForm.get('identity')?.hasError('required') && employeeForm.get('identity')?.touched">
+        תעודת זהות היא שדה חובה וחייבת להכיל לפחות 9 תווים
+      </mat-error>
+      <mat-error *ngIf="employeeForm.get('identity')?.hasError('pattern') && employeeForm.get('identity')?.touched">
+        תעודת הזהות חייבת להכיל מספרים בלבד ול
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field" color="accent">
+      <mat-label>מגדר</mat-label>
+      <mat-select formControlName="gender" placeholder="בחר מגדר" class="custom-input">
+        <mat-option [value]="0">זכר</mat-option>
+        <mat-option [value]="1">נקבה</mat-option>
+      </mat-select>
+      <mat-error *ngIf="employeeForm.get('gender')?.hasError('required') && employeeForm.get('gender')?.touched">
+        המגדר הוא שדה חובה
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field matTooltip="עובד חייב לעיות מעל גיל 18" appearance="fill" class="form-field" color="accent">
+      <mat-label>תאריך לידה</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="birthdate" placeholder="בחר תאריך לידה" class="custom-input">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <mat-error *ngIf="employeeForm.get('birthdate')?.hasError('required') && employeeForm.get('birthdate')?.touched">
+        תאריך לידה הוא שדה חובה
+      </mat-error>
+      <mat-error *ngIf="employeeForm.get('birthdate')?.hasError('tooYoung') && employeeForm.get('birthdate')?.touched">
+        העובד חייב להיות מעל גיל 18
+      </mat-error>
+    </mat-form-field>
+    
+    <!-- הוספת תאריך תחילת העסקה עם תווית Floating ואנימציה נוספת -->
+    <mat-form-field  matTooltip="הכנס תאריך מאוחר מתאריך לידה " appearance="fill" class="form-field">
+      <mat-label>תאריך כניסה לעבודה</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="employmentStartDate" placeholder="תאריך תחילת העסקה" class="custom-input">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <mat-error *ngIf="employeeForm.get('employmentStartDate')?.hasError('required') && employeeForm.get('employmentStartDate')?.touched">
+        תאריך תחילת העסקה הוא שדה חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- תוספת של MatTooltip על כפתור "שלח" -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="employeeForm.invalid" class="submit-btn" matTooltip="שלח טופס זה">
+      להוספה והמשך
+    </button>
+
+    <!-- הוספת הודעה עם MatSnackBar לאחר שליחת הטופס -->
+    <ng-template #snackBarTemplate>
+      הטופס נשלח בהצלחה!
+    </ng-template>
+  </form>
+</div>

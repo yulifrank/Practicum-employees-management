@@ -1,72 +1,68 @@
-
 <div class="content">
   <div class="small-con">
-  <!-- עריכת פרטי העובד -->
-  <button mat-button class="cus" (click)="close()">
-    חזרה
-    <mat-icon>arrow_forward</mat-icon>
-  </button>
-  <div  class="edit-employee-details form-container" >
-    <h3>עריכת פרטי העובד</h3>
-    <div *ngIf="editingEmployee">
-      <form [formGroup]="employeeForm" class="employee-form">
-        <mat-form-field class="form-group">
-          <mat-label>שם פרטי:</mat-label>
-          <input matInput type="text" id="firstName" formControlName="firstName">
-          <mat-error *ngIf="employeeForm.get('firstName').invalid && employeeForm.get('firstName').touched">שם פרטי חובה</mat-error>
-        </mat-form-field>
-      
-        <mat-form-field class="form-group">
-          <mat-label>שם משפחה:</mat-label>
-          <input matInput type="text" id="lastName" formControlName="lastName">
-          <mat-error *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched">שם משפחה חובה</mat-error>
-        </mat-form-field>
-      
-        <mat-form-field class="form-group">
-          <mat-label>תעודת זהות:</mat-label>
-          <input matInput type="text" id="identity" formControlName="identity">
-          <mat-error *ngIf="employeeForm.get('identity').invalid && employeeForm.get('identity').touched">תעודת זהות חייבת לכלול תווים חוקיים</mat-error>
-        </mat-form-field>
-      
-        <mat-form-field class="form-group">
-          <mat-label>תאריך לידה:</mat-label>
-          <input matInput [matDatepicker]="birthdatePicker" formControlName="birthdate">
-          <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #birthdatePicker></mat-datepicker>
-          <mat-error *ngIf="employeeForm.get('birthdate').invalid && employeeForm.get('birthdate').touched">
-            עובד חייב להיות מעל גיל 18
-          </mat-error>
-     
-        </mat-form-field>
-        
-        <mat-form-field class="form-group">
-          <mat-label>תאריך כניסה לעבודה:</mat-label>
-          <input matInput [matDatepicker]="employmentStartDatePicker" formControlName="employmentStartDate">
-          <mat-datepicker-toggle matSuffix [for]="employmentStartDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #employmentStartDatePicker></mat-datepicker>
-          <mat-error *ngIf="employeeForm.get('employmentStartDate').invalid && employeeForm.get('employmentStartDate').touched">
-            תאריך התחלת העסקה חייב להיות לאחר מתאריך הלידה
-          </mat-error>
-        </mat-form-field>
-        
-      
-             
-    
-  <mat-form-field appearance="fill" class="form-group">
-    <mat-label>מגדר</mat-label>
-    <mat-select formControlName="gender" placeholder="בחר מגדר" class="custom-input">
-      <mat-option [value]="0">זכר</mat-option>
-      <mat-option [value]="1">נקבה</mat-option>
-    </mat-select>
-    <mat-error *ngIf="employeeForm.get('gender')?.hasError('required') && employeeForm.get('gender')?.touched">
-      המגדר הוא שדה חובה
-    </mat-error>
-  </mat-form-field>
-      
-        <button type="button" [disabled]="!employeeForm.valid" class="btn btn-primary action-button" (click)="openMessageDialogSubmit()">שמור</button>
-        <button type="button" class="btn btn-secondary action-button" (click)="cancelEdit()">בטל</button>
-      </form>
-    </div>
+    <button mat-button class="cus" matTooltip="חזרה לדף עובדים" (click)="close()">
+      חזרה
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+    <div class="edit-employee-details form-container">
+      <h3>עריכת פרטי העובד</h3>
+      <div *ngIf="editingEmployee">
+        <form [formGroup]="employeeForm" class="employee-form">
+          <mat-form-field class="form-group">
+            <mat-label>שם פרטי:</mat-label>
+            <input matInput type="text" id="firstName" formControlName="firstName">
+            <mat-error *ngIf="employeeForm.get('firstName').invalid && employeeForm.get('firstName').touched">שם פרטי חובה</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-group">
+            <mat-label>שם משפחה:</mat-label>
+            <input matInput type="text" id="lastName" formControlName="lastName">
+            <mat-error *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched">שם משפחה חובה</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-group">
+            <mat-label>תעודת זהות:</mat-label>
+            <input matInput type="text" id="identity" formControlName="identity">
+            <mat-error *ngIf="employeeForm.get('identity').invalid && employeeForm.get('identity').touched">תעודת זהות חייבת לכלול תווים חוקיים</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-group">
+            <mat-label>תאריך לידה:</mat-label>
+            <input matInput [matDatepicker]="birthdatePicker" formControlName="birthdate">
+            <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #birthdatePicker></mat-datepicker>
+            <mat-error *ngIf="employeeForm.get('birthdate').invalid && employeeForm.get('birthdate').touched">
+              עובד חייב להיות מעל גיל 18
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-group">
+            <mat-label>תאריך כניסה לעבודה:</mat-label>
+            <input matInput [matDatepicker]="employmentStartDatePicker" formControlName="employmentStartDate">
+            <mat-datepicker-toggle matSuffix [for]="employmentStartDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #employmentStartDatePicker></mat-datepicker>
+            <mat-error *ngIf="employeeForm.get('employmentStartDate').invalid && employeeForm.get('employmentStartDate').touched">
+              תאריך התחלת העסקה חייב להיות לאחר מתאריך הלידה
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-group">
+            <mat-label>מגדר</mat-label>
+            <mat-select formControlName="gender" placeholder="בחר מגדר" class="custom-input">
+              <mat-option [value]="0">זכר</mat-option>
+              <mat-option [value]="1">נקבה</mat-option>
+            </mat-select>
+            <mat-error *ngIf="employeeForm.get('gender')?.hasError('required') && employeeForm.get('gender')?.touched">
+              המגדר הוא שדה חובה
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-button class="btn btn-primary action-button disabled-button" matTooltip="שמור פרטי עובד " (click)="openMessageDialogSubmit()" [disabled]="employeeForm.invalid">
+            שמור
+          </button>
+          <button type="button" class="btn btn-secondary action-button" matTooltip="בטל שינוים "  (click)="cancelEdit()">בטל</button>
+        </form>
+      </div>
     </div>
   </div>
   <div class="component-container">

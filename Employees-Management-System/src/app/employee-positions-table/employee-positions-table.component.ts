@@ -15,6 +15,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Route, Router } from '@angular/router';
 import { AddEmployeePositionComponent } from '../add-employee-position/add-employee-position.component';
 import { EditEmployeePositionComponent } from '../edit-employee-position/edit-employee-position.component';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-employee-positions-table',
@@ -24,6 +25,7 @@ import { EditEmployeePositionComponent } from '../edit-employee-position/edit-em
     MatFormFieldModule,
     MatDatepickerModule,
     MatSelectModule,
+    MatTooltip,
     MatNativeDateModule,
      MatTableModule,
      CommonModule,
