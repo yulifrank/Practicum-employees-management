@@ -137,6 +137,8 @@ export class AddEmployeeComponent {
             
           
             } else {
+              this.dialog.closeAll()
+              dialogRef.close(); // Close loading dialog
               this.router.navigate(['/edit-employee', response.code]);
             }
           },

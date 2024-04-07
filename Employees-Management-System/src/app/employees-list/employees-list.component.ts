@@ -19,6 +19,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { PositionsComponent } from '../positions/positions.component';
+import { FilterService } from '../filter.service';
 @Component({
   selector: 'app-employees-list',
   standalone: true,
@@ -30,19 +31,29 @@ export class EmployeesListComponent implements OnInit {
   columnsToDisplay: string[] = ['firstName', 'lastName', 'identity', 'birthdate', 'actions'];
   employees: MatTableDataSource<Employee>;
 
-  constructor(private dialog: MatDialog, private employeeService: EmployeeService, private router: Router) { }
+  filteredEmployees: Employee[] = []; // Initialize filteredEmployees array
+
+  constructor(
+    private dialog: MatDialog,
+    private employeeService: EmployeeService,
+    private router: Router,
+    private filterService: FilterService
+  ) {}
 
   ngOnInit(): void {
     this.getEmployees();
+    this.filterService.filteredEmployees$.subscribe(filteredEmployees => {
+      this.filteredEmployees = filteredEmployees;
+      this.employees = new MatTableDataSource<Employee>(this.filteredEmployees);
+    });
   }
-
+  
   getEmployees(): void {
-    this.employeeService.getEmployees()
-
-      .subscribe(employees => {
-        this.employees = new MatTableDataSource<Employee>(employees);
-      });
+    this.employeeService.getEmployees().subscribe(employees => {
+      this.employees = new MatTableDataSource<Employee>(employees);
+    });
   }
+
   openAddEmployeeDialog(): void {
     const dialogRef = this.dialog.open(AddEmployeeComponent, {
       width: '50%',

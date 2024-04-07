@@ -1,36 +1,3 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <div class="act"> <span class="spacer"></span>
-      <button mat-button class="custom-button" matTooltip="הוספת עובד לעסק" class="custom-button1"
-        (click)="openAddEmployeeDialog()">
-        <mat-icon>supervisor_account</mat-icon>    
-        הוספת עובד
-      </button>
-      <span class="spacer"></span>
-      <button mat-icon-button class="custom-button" matTooltip="הורדה לקובץ אקסל" class="custom-button1"
-        (click)="downloadData()">
-        <mat-icon class="color">description</mat-icon>
-
-
-        הורדה לאקסל
-      </button>
-      <span class="spacer"></span>
-      <button mat-icon-button class="custom-button" matTooltip="להוספה וצפייה בתפקידים" class="custom-button1"
-        (click)="openPositionDialog()">
-        <mat-icon class="color">assignment</mat-icon>
-             תפקידים 
-      </button>
-    </div>
-    <div class="search-container">
-      <div class="search">
-        <input class="mat-input" (keyup)="applyFilter($event)" placeholder="סינון">
-      </div>
-      <mat-icon class="color">search</mat-icon>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-
 
 <div class="mat-table-container">
   <div class="table-header">
