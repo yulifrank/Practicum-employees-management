@@ -3,7 +3,7 @@
         <div class="form-field">
             <mat-form-field appearance="fill">
                 <mat-label>בחר תפקיד</mat-label>
-                <mat-select formControlName="positionId">
+                <mat-select formControlName="positionId" class="mat-select-value-text">
                     <mat-option *ngFor="let position of availablePositions" [value]="position.positionId">
                         {{ position.positionName }}
                     </mat-option>
@@ -26,7 +26,7 @@
         <div class="form-row">
             <mat-form-field class="form-field" appearance="fill">
                 <mat-label>ניהולי/רגיל</mat-label>
-                <mat-select formControlName="isManagement" placeholder="ניהולי/רגיל">
+                <mat-select formControlName="isManagement" placeholder="ניהולי/רגיל" class="mat-select-value-text">
                     <mat-option [value]="true">ניהולי</mat-option>
                     <mat-option [value]="false">רגיל</mat-option>
                 </mat-select>

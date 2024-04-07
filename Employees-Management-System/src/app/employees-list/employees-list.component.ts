@@ -18,6 +18,7 @@ import { saveAs } from 'file-saver'; // ייבוא פונקציה saveAs מספ�
 import { DialogComponent } from '../dialog/dialog.component';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { PositionsComponent } from '../positions/positions.component';
 @Component({
   selector: 'app-employees-list',
   standalone: true,
@@ -51,13 +52,12 @@ export class EmployeesListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(formData => {
       if (formData) {
         console.log('Form data:', formData);
-        window.location.reload();
       } else {
         console.log('Dialog closed without form data');
-        window.location.reload();
-
       }
     });
+    this.getEmployees();
+
 
   }
   deleteEmployee(employee: Employee): void {
@@ -88,18 +88,32 @@ export class EmployeesListComponent implements OnInit {
   downloadData() {
     const data: any[] = this.employees.filteredData.map((employee: Employee) => {
       return {
-        'שם פרטי': employee.firstName,
-        'שם משפחה': employee.lastName,
-        'תעודת זהות': employee.identity,
-        'תאריך לידה': employee.birthdate
+        'שם פרטי': { v: employee.firstName, t: 's', s: { alignment: { horizontal: 'right' } } },
+        'שם משפחה': { v: employee.lastName, t: 's', s: { alignment: { horizontal: 'right' } } },
+        'תעודת זהות': { v: employee.identity, t: 's', s: { alignment: { horizontal: 'right' } } },
+        'תאריך לידה': { v: employee.birthdate, t: 's', s: { alignment: { horizontal: 'right' } } }
       };
     });
-
+  
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-
+  
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
     saveAs(blob, 'employees.xlsx');
+  }
+  
+  openPositionDialog() {
+
+    const dialogRef = this.dialog.open(PositionsComponent, {
+      width: '60%',
+      height: '70%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => 
+      {
+      if (result === 'confirm') {
+      };})
+
   }
 }

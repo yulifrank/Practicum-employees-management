@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { EmployeeService } from './employee.service';
-import { EmployeePosition, Position } from './Models/EmployeePosition.model';
+import { EmployeePosition } from './Models/EmployeePosition.model';
+import { Position } from './Models/position.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,9 @@ export class PositionService {
     return this.http.get<Position[]>(this.baseUrl);
   }
 
+addPosition(position:Position): Observable<Position> {
+    return this.http.post<Position>(this.baseUrl,position);
+  }
   getEmployeePositionsNotAssigned(employeeId: number): Observable<Position[]> {
     return this.employeeService.getEmployeePositions(employeeId).pipe(
       switchMap(employeePositions => {

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EmployeePosition, EmployeePositionPostModel, Position } from '../Models/EmployeePosition.model';
+import { EmployeePosition,  } from '../Models/EmployeePosition.model';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployeeService } from '../employee.service';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { Position } from '../Models/position.model';
 
 @Component({
   selector: 'app-edit-position-employee',

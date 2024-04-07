@@ -4,7 +4,6 @@ import { EmployeeService } from '../employee.service';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PositionService } from '../position.service';
-import { Position } from '../Models/EmployeePosition.model';
 import { Employee } from '../Models/employee.model';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -12,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
+import { Position } from '../Models/position.model';
 
 @Component({
   selector: 'app-add-employee-position',
@@ -81,13 +81,23 @@ export class AddEmployeePositionComponent implements OnInit {
     if (this.employeePositionForm.valid) {
       const formData = this.employeePositionForm.value;
 
-      this.employeeService.addPositionToEmployee(this.employeeId, formData).subscribe(() => {
-        // Handle success
-        this.dialogRef.close(formData);
-      }, error => {
-        this.dialogRef.close(formData);
-        console.error('Error adding position:', error);
-      });
+      this.employeeService.addPositionToEmployee(this.employeeId, formData).subscribe(
+        (response) => {
+            if (response === null) {
+                console.error('השירות החזיר ערך ריק (null)');
+            } else {
+                this.dialogRef.close(formData);
+            }
+        },
+        (error) => {
+            this.dialogRef.close(formData);
+            console.error('שגיאה בהוספת מיקום:', error);
+        }
+      );
+      
     }
   }
 }
+
+
+

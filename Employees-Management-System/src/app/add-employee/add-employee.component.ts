@@ -40,7 +40,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatTooltipModule,
     MatDividerModule,
     MatStepperModule
-],
+  ],
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss']
 })
@@ -51,7 +51,7 @@ export class AddEmployeeComponent {
   @ViewChild('picker1') picker1: MatDatepicker<Date>;
   @ViewChild('picker2') picker2: MatDatepicker<Date>;
 
-  constructor(private matIconRegistry: MatIconRegistry, private sanitizer: DomSanitizer,private formBuilder: FormBuilder, private employeeService: EmployeeService, private dialog: MatDialog, private router: Router) {
+  constructor(private matIconRegistry: MatIconRegistry, private sanitizer: DomSanitizer, private formBuilder: FormBuilder, private employeeService: EmployeeService, private dialog: MatDialog, private router: Router) {
 
 
     this.matIconRegistry.addSvgIcon(
@@ -63,7 +63,7 @@ export class AddEmployeeComponent {
     this.employeeForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      identity: ['', [Validators.required, Validators.pattern('^[0-9]{9,11}')]],
+      identity: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
       gender: ['', Validators.required],
       birthdate: ['', Validators.required],
       employmentStartDate: ['', Validators.required]
@@ -117,36 +117,49 @@ export class AddEmployeeComponent {
 
   submitForm() {
     if (this.employeeForm.valid) {
-      this.employeeService.addEmployee({
-        "firstName": this.employeeForm.get('firstName').value,
-        "lastName": this.employeeForm.get('lastName').value,
-        "identity": this.employeeForm.get('identity').value,
-        "gender": this.employeeForm.get('gender').value,
-        "birthdate": this.employeeForm.get('birthdate').value,
-        "employmentStartDate": this.employeeForm.get('employmentStartDate').value
-      }).subscribe(
-        response => {
-          console.log('The data was successfully sent to the server:', response);
-          this.dialog.closeAll(); // Close all open dialogs
-
-          this.router.navigate(['/edit-employee', response.code])
-        },
-        error => {console.error('Error sending data to the service:', error)
-        const dialogRef = this.dialog.open(DialogComponent, {
-          width: '20%',
-          data: { errorMessage: 'לא ניתן להכניס עובד זה!' }
-        });
-    
-        dialogRef.afterClosed().subscribe(result => {
-          this.dialog.closeAll(); // Close all open dialogs
-
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '20%',
+        data: { errorMessage: 'אנא המתן, טוען...' }
       });
-    
-    })
+  
+      this.employeeService.addEmployee(this.employeeForm.value)
+        .subscribe(
+          response => {
+            console.log('The data was successfully sent to the server:', response);
+            dialogRef.close(); // Close loading dialog
+  
+            if (response === null) {
+              const errorDialogRef = this.dialog.open(DialogComponent, {
+                width: '20%',
+                data: { errorMessage: 'תעודת זהות כזו כבר קיימת במערכת!' }
+              });
+  
+            
+          
+            } else {
+              this.router.navigate(['/edit-employee', response.code]);
+            }
+          },
+          error => {
+            console.error('Error sending data to the service:', error);
+            dialogRef.close(); // Close loading dialog
+  
+            const errorDialogRef = this.dialog.open(DialogComponent, {
+              width: '20%',
+              data: { errorMessage: 'לא ניתן להכניס עובד זה!' }
+            });
+  
+            errorDialogRef.afterClosed().subscribe(result => {
+              this.dialog.closeAll(); // Close all open dialogs
+            });
+          }
+        );
     } else {
       this.markFormGroupTouched(this.employeeForm);
     }
   }
+  
+
   markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
@@ -157,7 +170,7 @@ export class AddEmployeeComponent {
     });
   }
 
-  goBack(){
+  goBack() {
     this.dialog.closeAll(); // Close all open dialogs
 
   }

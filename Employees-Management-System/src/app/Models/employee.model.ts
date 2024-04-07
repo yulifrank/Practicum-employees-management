@@ -4,7 +4,6 @@ export interface Employee {
     lastName: string;
     identity: string;
     gender: Gender;
-
     birthdate: Date;
     employmentStartDate: Date;
   }

@@ -1,0 +1,23 @@
+<div class="add-position-container">
+    <button mat-button class="arrow_back" (click)="goBack()" matTooltip="חזור אחורה">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    <h2>הוספת תפקיד חדש</h2>
+    <form [formGroup]="positionNameForm" (ngSubmit)="onSubmit()" class="form">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>שם התפקיד</mat-label>
+        <input matInput formControlName="positionName" placeholder="הזן שם תפקיד" class="custom-input">
+        <mat-error *ngIf="positionName.hasError('required') && positionName.touched">
+          שם התפקיד הוא שדה חובה
+        </mat-error>
+        <mat-error *ngIf="positionName.hasError('minlength') && positionName.touched">
+          שם התפקיד חייב להכיל לפחות 2 תווים
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="positionNameForm.invalid" class="submit-btn">
+        הוסף תפקיד
+      </button>
+    </form>
+  </div>
+  

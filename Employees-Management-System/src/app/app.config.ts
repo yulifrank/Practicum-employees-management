@@ -12,7 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
-    // או כל ערך אחר של השפה שאתה משתמש
     importProvidersFrom(MatNativeDateModule)
 
   ]

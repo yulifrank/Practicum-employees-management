@@ -3,20 +3,22 @@
     <div class="act"> <span class="spacer"></span>
       <button mat-button class="custom-button" matTooltip="הוספת עובד לעסק" class="custom-button1"
         (click)="openAddEmployeeDialog()">
-        <mat-icon class="color">add</mat-icon>
+        <mat-icon>supervisor_account</mat-icon>    
         הוספת עובד
       </button>
       <span class="spacer"></span>
       <button mat-icon-button class="custom-button" matTooltip="הורדה לקובץ אקסל" class="custom-button1"
         (click)="downloadData()">
-        <mat-icon class="color">download</mat-icon>
+        <mat-icon class="color">description</mat-icon>
+
+
         הורדה לאקסל
       </button>
       <span class="spacer"></span>
-      <button mat-icon-button class="custom-button" matTooltip="הורדה לקובץ אקסל" class="custom-button1"
-        (click)="downloadData()">
-        <mat-icon class="color">add</mat-icon>
-        תפקידים 
+      <button mat-icon-button class="custom-button" matTooltip="להוספה וצפייה בתפקידים" class="custom-button1"
+        (click)="openPositionDialog()">
+        <mat-icon class="color">assignment</mat-icon>
+             תפקידים 
       </button>
     </div>
     <div class="search-container">
@@ -51,12 +53,13 @@
       <td mat-cell *matCellDef="let employee">{{employee.birthdate|date}}</td>
     </ng-container>
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>פעולות</th>
+      <th mat-header-cell *matHeaderCellDef>עריכה  / מחיקה</th>
       <td mat-cell *matCellDef="let employee">
         <button matTooltip="לצפיה ועריכת פרטים" mat-icon-button class="custom-button edit-button"
           (click)="editEmployee(employee.code)">
           <mat-icon class="color">edit</mat-icon>
         </button>
+        
         <button matTooltip="למחיקת העובד" mat-icon-button class="custom-button delete-button"
           (click)="deleteEmployee(employee)">
           <mat-icon class="color">delete</mat-icon>
