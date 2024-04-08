@@ -1,26 +1,6 @@
-.mat-top-bar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 70%;
-  margin: auto;
-  direction: rtl;
-  text-align: center;
-  text-shadow: #7b3f3fa4;
-}
-
-.top {
-  display: flex;
-}
-
 .buttons-container {
   margin-right: auto;
 }
-
-.search-container {
-  margin-left: auto;
-}
-
 
 .custom-table th,
 .custom-table td {
@@ -56,12 +36,6 @@
   flex-wrap: wrap;
 }
 
-
-
-.mat-icon-button {
-  visibility: visible !important;
-}
-
 .custom-button {
   background-color: transparent;
   color: #333;
@@ -77,7 +51,8 @@
   margin-right: 10%;
   background-color: rgba(190, 190, 190, 0.338);
 }
-.custom-button1{
+
+.custom-button1 {
   background-color: transparent;
   color: #333;
   padding: 7px 10px;
@@ -118,81 +93,44 @@
   z-index: 1;
 }
 
-.mat-toolbar {
-  background: linear-gradient(to right, #00ffd07d, #ff98b89d , #93fff2); /* צבע gradient */
-  color: white; /* צבע טקסט */
-  margin-bottom: 2%;
-  direction: rtl;
-}
-
-.mat-toolbar-row {
-  justify-content: center; /* מיישור כפתורים באמצע */
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-  margin-right: 2%;
-  margin-left: 3%;
-  background-color: #b0b0b0;
-  border-radius: 25px;
-  padding: 4px 7px;
-  width: 12%;
-  text-align: center;
-
-}
-
-.search-container .mat-input {
-  border: none;
-  background-color: transparent;
-  color: rgb(0, 0, 0);
-  width: 100%;
-  outline: none;
-}
-
-.search-icon {
-  background-color: transparent;
-  color: white;
-  margin-right: 2%;
-}
-.se{
-  margin-top: -10%;
-}
- .search{
-background-color: #ffffff9f;
-width: 85%;
-border-radius: 5px;
-height: 20px;
-padding: 1%;
-display: flex;
-
-
-}
-
-.custom-button:hover, .butt:hover, .custom-button1:hover{
+.custom-button:hover,
+.butt:hover,
+.custom-button1:hover {
   background-color: #6d6d6d4f;
-  color:rgb(0, 0, 0) ;
+  color: rgb(0, 0, 0);
 }
 
-.spacer{
+.spacer {
   flex: 0;
 
 }
-.download{
-  margin-top: 0.4%;
-  margin-left: 0%;
-}
-.act{
+
+.act {
   margin-left: 30%;
 }
 
-
 .mat-icon {
-  color: rgba(0, 0, 0, 0.492) !important; /* !important כדי להעדיף על CSS קיים */
+  color: rgba(0, 0, 0, 0.492) !important;
+  /* !important כדי להעדיף על CSS קיים */
 }
 
-.mat-mdc-header-cell
-{
+.mat-mdc-header-cell {
   color: #000000;
   font-size: larger;
+}
+
+.spinner {
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #00ffe1;
+
 }

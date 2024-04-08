@@ -1,44 +1,38 @@
-  <!-- טבלת התפקידים -->
-  <div class="employee-positions">
-    <button mat-button class="custom-button" matTooltip="הוספת תפקיד לעובד" (click)="openAddPositionDialog()">
-        <mat-icon>add</mat-icon>
-        הוספת תפקיד  
-    </button>
+<!-- טבלת התפקידים -->
+<div class="employee-positions">
+  <button mat-button class="custom-button" matTooltip="הוספת תפקיד לעובד" (click)="openAddPositionDialog()">
+    <mat-icon>add</mat-icon>
+    הוספת תפקיד
+  </button>
+  <div class="mat-table">
+    <mat-table [dataSource]="employeePositions" class="mat-elevation-z8 custom-table">
+      <ng-container matColumnDef="positionName">
+        <mat-header-cell *matHeaderCellDef>שם התפקיד</mat-header-cell>
+        <mat-cell *matCellDef="let position">{{ position.position.positionName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="entryDate">
+        <mat-header-cell *matHeaderCellDef>תאריך כניסה</mat-header-cell>
+        <mat-cell *matCellDef="let position">{{ position.entryDate|date }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="isManagement">
+        <mat-header-cell *matHeaderCellDef>סוג תפקיד</mat-header-cell>
+        <mat-cell *matCellDef="let position">{{ position.isManagement ? 'ניהולי' : 'רגיל' }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>עריכה/מחיקה</mat-header-cell>
+        <mat-cell *matCellDef="let position">
+          <button matTooltip="עריכה " mat-icon-button class="custom-butt" (click)="deletePosition(position)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button matTooltip="מחיקה " mat-icon-button class="custom-butt" (click)="editPosition(position)">
+            <mat-icon>edit</mat-icon>
+          </button>
 
-    <div class="mat-table">
-      <mat-table [dataSource]="employeePositions" class="mat-elevation-z8 custom-table">
-        <ng-container matColumnDef="positionName">
-          <mat-header-cell *matHeaderCellDef>שם התפקיד</mat-header-cell>
-          <mat-cell *matCellDef="let position">{{ position.position.positionName }}</mat-cell>
-        </ng-container>
-        
-        <ng-container matColumnDef="entryDate">
-          <mat-header-cell *matHeaderCellDef>תאריך כניסה</mat-header-cell>
-          <mat-cell *matCellDef="let position">{{ position.entryDate|date }}</mat-cell>
-        </ng-container>
-        
-        <ng-container matColumnDef="isManagement">
-          <mat-header-cell *matHeaderCellDef>סוג תפקיד</mat-header-cell>
-          <mat-cell *matCellDef="let position">{{ position.isManagement ? 'ניהולי' : 'רגיל' }}</mat-cell>
-        </ng-container>
-        
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef>עריכה/מחיקה</mat-header-cell>
-          <mat-cell *matCellDef="let position">
-            <button matTooltip="עריכה " mat-icon-button class="custom-butt" (click)="deletePosition(position)">
-              <mat-icon>delete</mat-icon>
-            
-            </button>
-               <button matTooltip="מחיקה " mat-icon-button class="custom-butt" (click)="editPosition(position)"> 
-              <mat-icon>edit</mat-icon>
-            </button>
+        </mat-cell>
+      </ng-container>
 
-          </mat-cell>
-        </ng-container>
-        
-        <mat-header-row *matHeaderRowDef="['positionName', 'entryDate', 'isManagement', 'actions']"></mat-header-row>
-        
-        <mat-row *matRowDef="let position; columns: ['positionName', 'entryDate', 'isManagement', 'actions']"></mat-row>
-      </mat-table>
-    </div>
+      <mat-header-row *matHeaderRowDef="['positionName', 'entryDate', 'isManagement', 'actions']"></mat-header-row>
+      <mat-row *matRowDef="let position; columns: ['positionName', 'entryDate', 'isManagement', 'actions']"></mat-row>
+    </mat-table>
   </div>
+</div>

@@ -13,9 +13,7 @@ namespace EmployeeManagement.API.Mapping
             CreateMap<PositionPostModel, Position>().ReverseMap();
             CreateMap<EmployeePostModel, Employee>().ReverseMap();
             CreateMap<EmployeePositionPostModel, EmployeePosition>().ReverseMap();
-        
-
-
+       
 
         }
     }

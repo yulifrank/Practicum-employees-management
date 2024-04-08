@@ -12,7 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Route, Router } from '@angular/router';
 import { AddEmployeePositionComponent } from '../add-employee-position/add-employee-position.component';
 import { EditEmployeePositionComponent } from '../edit-employee-position/edit-employee-position.component';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -20,16 +19,8 @@ import { MatTooltip } from '@angular/material/tooltip';
 @Component({
   selector: 'app-employee-positions-table',
   standalone: true,
-  imports: [    MatInputModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatTooltip,
-    MatNativeDateModule,
-     MatTableModule,
-     CommonModule,
-     MatIconModule,],
+  imports: [MatInputModule, MatButtonModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatTooltip,
+            MatNativeDateModule, MatTableModule, CommonModule, MatIconModule,],
   templateUrl: './employee-positions-table.component.html',
   styleUrl: './employee-positions-table.component.scss'
 })
@@ -39,7 +30,7 @@ export class EmployeePositionsTableComponent {
   employeePositions: MatTableDataSource<EmployeePosition>;
 
 
-  constructor(private employeeService: EmployeeService,private router:Router,private dialog: MatDialog) {}
+  constructor(private employeeService: EmployeeService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (this.employeeId) {
@@ -47,11 +38,11 @@ export class EmployeePositionsTableComponent {
     }
   }
 
-loadEmployeePositions(employeeId: number): void {
-  this.employeeService.getEmployeePositions(employeeId).subscribe(positions => {
-    this.employeePositions = new MatTableDataSource(positions);
-  });
-}
+  loadEmployeePositions(employeeId: number): void {
+    this.employeeService.getEmployeePositions(employeeId).subscribe(positions => {
+      this.employeePositions = new MatTableDataSource(positions);
+    });
+  }
   openMessageDialogDelete(empPosition: EmployeePosition): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
@@ -67,7 +58,7 @@ loadEmployeePositions(employeeId: number): void {
   openAddPositionDialog(): void {
     const dialogRef = this.dialog.open(AddEmployeePositionComponent, {
       width: '50%',
-      height:'70%',
+      height: '70%',
       data: { employeeId: this.employeeId } // Pass employeeId to the dialog component
     });
 
@@ -77,7 +68,7 @@ loadEmployeePositions(employeeId: number): void {
       } else {
         console.log('Dialog closed without form data');
       }
-     this.loadEmployeePositions(this.employeeId)
+      this.loadEmployeePositions(this.employeeId)
     });
   }
 
@@ -112,9 +103,11 @@ loadEmployeePositions(employeeId: number): void {
       width: '450px',
       height: '450px',
 
-      data: { employeeId: empPosition.employeeId, positionId: empPosition.positionId ,positionName:empPosition.position.positionName}
+      data: { employeeId: empPosition.employeeId, positionId: empPosition.positionId, positionName: empPosition.position.positionName }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
-this.loadEmployeePositions(this.employeeId)    });
-}}
+      this.loadEmployeePositions(this.employeeId)
+    });
+  }
+}

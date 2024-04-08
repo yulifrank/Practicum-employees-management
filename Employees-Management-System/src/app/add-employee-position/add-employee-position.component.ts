@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { EmployeeService } from '../employee.service';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {  FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PositionService } from '../position.service';
 import { Employee } from '../Models/employee.model';
@@ -17,14 +17,7 @@ import { Position } from '../Models/position.model';
   selector: 'app-add-employee-position',
   standalone: true,
   imports: [
-    CommonModule,
-    MatCheckboxModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatDatepickerModule
+    CommonModule,MatCheckboxModule,FormsModule, ReactiveFormsModule, MatInputModule,MatSelectModule,MatFormFieldModule,MatDatepickerModule
   ],
   templateUrl: './add-employee-position.component.html',
   styleUrl: './add-employee-position.component.scss'
@@ -34,7 +27,6 @@ export class AddEmployeePositionComponent implements OnInit {
   employee: Employee;
   availablePositions: Position[];
   employeePositionForm: FormGroup;
-
   @ViewChild('picker3') picker3: MatDatepicker<Date>;
 
   constructor(

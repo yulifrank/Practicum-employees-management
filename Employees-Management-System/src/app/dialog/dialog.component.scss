@@ -57,18 +57,18 @@
 }
 .cancel-button, .confirm-button {
     padding: 7px 14px;
-    border: 2px solid #29a6a2; /* צבע המסגרת */
+    border: 2px solid #29a6a2; 
     background-color: transparent;
-    color: #29a6a2; /* צבע הטקסט */
+    color: #29a6a2;
     font-size: 16px;
     cursor: pointer;
-    transition: color 0.3s, border-color 0.3s, background-color 0.3s; /* החלפת צבעים ועיצוב עם מעבר העכבר */
-    border-radius: 7px; /* קצוות מעט מעוגלים */
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s; 
+    border-radius: 7px; 
 }
 
 .cancel-button:hover, .confirm-button:hover {
-    color: #0f6e6b; /* גוון הטקסט בעת העכבר */
-    border-color: #0f6e6b; /* צבע המסגרת בעת העכבר */
+    color: #1fddd7; /* גוון הטקסט בעת העכבר */
+    border-color: #19cfc9; /* צבע המסגרת בעת העכבר */
     background-color: rgba(41, 166, 162, 0.1); /* עיניין קל בעת הבהוב */
 }
 

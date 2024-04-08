@@ -29,9 +29,11 @@ namespace EmployeeManagement.Data.Repositories
         public async Task<Employee> AddEmployeeAsync(Employee employee)
         {
             var existingEmployee = await _context.Employees.FirstOrDefaultAsync(x => x.Identity == employee.Identity);
-            if (existingEmployee != null)
+            if (existingEmployee != null )
             {
-               return await UpdateEmployeeAsync(employee.Code, employee);   
+                await Console.Out.WriteLineAsync(   "ששונה מbbbbbbb");
+                return await UpdateEmployeeAsync(existingEmployee.Code, employee);
+             
             }
             else
             {
@@ -39,6 +41,7 @@ namespace EmployeeManagement.Data.Repositories
                 await _context.SaveChangesAsync();
                 return employee;
             }
+          
         }
 
         public async Task<Employee> UpdateEmployeeAsync(int code, Employee updatedEmployee)

@@ -10,8 +10,6 @@ import { Position } from "./position.model";
     entryDate: Date;
     isManagement: boolean;
   }
-  
-
   export interface EmployeePositionPostModel
   {
     positionId: number;

@@ -18,10 +18,16 @@ namespace EmployeeManagement.Data.Repositories
         }
         public async Task<Position> AddPositionAsync(Position position)
         {
-            _context.Positions.AddAsync(position);
+            var existingPosition = await _context.Positions.FirstOrDefaultAsync(p => p.PositionName == position.PositionName);
+            if (existingPosition != null)
+            {
+                return null;
+            }
+            _context.Positions.Add(position);
             await _context.SaveChangesAsync();
             return position;
         }
+
         public async Task<IEnumerable<Position>> GetPositions()
         {
             return await _context.Positions.ToListAsync();

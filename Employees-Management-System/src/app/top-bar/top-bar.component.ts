@@ -12,8 +12,8 @@ import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { PositionsComponent } from '../positions/positions.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import * as XLSX from 'xlsx'; // ייבוא ספריית xlsx לייצוא לקובץ אקסל
-import { saveAs } from 'file-saver'; // ייבוא פונקציה saveAs מספריית file-saver
+import * as XLSX from 'xlsx'; 
+import { saveAs } from 'file-saver'; 
 
 @Component({
   selector: 'app-top-bar',

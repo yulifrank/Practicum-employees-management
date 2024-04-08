@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace EmployeeManagement.Service.Services
 {
@@ -16,16 +19,22 @@ namespace EmployeeManagement.Service.Services
         {
             _employeeRepository = employeeRepository;   
         }
+
         public async Task<Employee> AddEmployeeAsync(Employee employee)
         {
             var existingEmployees = await _employeeRepository.GetAllEmployeesAsync();
-            if (existingEmployees.Any(e => e.Identity == employee.Identity))
+            if (!employee.Identity.All(char.IsDigit) ||
+                (DateTime.Today.Year - employee.Birthdate.Year) < 18 ||
+                employee.EmploymentStartDate < employee.Birthdate ||
+                existingEmployees.Any(e => e.Identity == employee.Identity&& e.IsActive))
             {
-                return null; 
+                await Console.Out.WriteLineAsync(   "founddddddddddd");
+                return null;
             }
 
             return await _employeeRepository.AddEmployeeAsync(employee);
         }
+
         public async Task<bool> DeleteEmployeeAsync(int code)
         {
             return await _employeeRepository.DeleteEmployeeAsync(code);
@@ -40,7 +49,18 @@ namespace EmployeeManagement.Service.Services
         }
         public async Task<Employee> UpdateEmployeeAsync(int code, Employee employee)
         {
-         return  await _employeeRepository.UpdateEmployeeAsync(code, employee); 
+            // Check if any of the conditions is not met
+            if (!employee.Identity.All(char.IsDigit) ||
+                DateTime.Today.Year - employee.Birthdate.Year < 18 ||
+                employee.EmploymentStartDate < employee.Birthdate)
+            {
+                // Return null if any condition is not met
+                return null;
+            }
+
+            // If all conditions pass, update the employee and return it
+            return await _employeeRepository.UpdateEmployeeAsync(code, employee);
         }
+
     }
 }

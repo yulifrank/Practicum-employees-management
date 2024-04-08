@@ -25,6 +25,7 @@ namespace EmployeeManagement.Core.Models
 
         [Required]
         public string Identity { get; set; }
+        [Required]
 
         public Gender Gender { get; set; }
 

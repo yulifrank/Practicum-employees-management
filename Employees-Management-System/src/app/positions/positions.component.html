@@ -1,23 +1,20 @@
 <div class="positions-container">
-    <button mat-button class="arrow_back" (click)="goBack()" matTooltip="חזור אחורה">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <h2>רשימת תפקידים</h2>
-    <div class="card-container">
-        <mat-card class="card" *ngFor="let position of positions; let i = index">
-            <mat-card-content>
-              <div class="card-content">
-                <h3>{{ position.positionName }}</h3>
-                <mat-divider></mat-divider>
-
-                <mat-icon class="employee-icon" *ngIf="icons[i]">{{ icons[i] }}</mat-icon>
-                <mat-icon class="employee-icon" *ngIf="!icons[i]">supervisor_account
-                </mat-icon>
-                              </div>
-            </mat-card-content>
-          </mat-card>
-          
-    </div>
-    <button mat-raised-button class="custom-button"  (click)="toAddposition()">הוסף תפקיד חדש</button>
+  <button mat-button class="arrow_back" (click)="goBack()" matTooltip="חזור אחורה">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2>תפקידים בעסק </h2>
+  <div class="card-container">
+    <mat-card class="card" *ngFor="let position of positions; let i = index">
+      <mat-card-content>
+        <div class="card-content">
+          <h3>{{ position.positionName }}</h3>
+          <mat-divider></mat-divider>
+          <mat-icon class="employee-icon" *ngIf="icons[i]">{{ icons[i] }}</mat-icon>
+          <mat-icon class="employee-icon" *ngIf="!icons[i]">supervisor_account
+          </mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
-  
+  <button mat-raised-button class="custom-button" (click)="toAddposition()">הוסף תפקיד חדש</button>
+</div>

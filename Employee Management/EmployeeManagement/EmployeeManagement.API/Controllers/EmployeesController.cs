@@ -32,8 +32,6 @@ namespace EmployeeManagement.API.Controllers
             return Ok(_mapper.Map<IEnumerable<EmployeeDto>>(employees));
         }
 
-
-        // GET api/<EmployeesControllers>/5
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
@@ -42,7 +40,6 @@ namespace EmployeeManagement.API.Controllers
        
         }
 
-        // POST api/<EmployeesControllers>
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] EmployeePostModel employee)
         {
@@ -50,7 +47,6 @@ namespace EmployeeManagement.API.Controllers
             return Ok(newEmployee);
         }
 
-        // PUT api/<EmployeesControllers>/5
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] EmployeePostModel employee)
         {
@@ -59,7 +55,6 @@ namespace EmployeeManagement.API.Controllers
 
         }
 
-        // DELETE api/<EmployeesControllers>/5
         [HttpDelete("{id}")]
         public async Task<bool> Delete(int id)
         {
@@ -81,14 +76,13 @@ namespace EmployeeManagement.API.Controllers
             return Ok(positionDtos);
         }
 
-        // POST api/<EmployeesController>/5/position
         [HttpPost("{id}/position")]
         public async Task<ActionResult<EmployeePosition>> AddPosition(int id, [FromBody] EmployeePositionPostModel employeePosition)
         {
             var newEmployeePosition = await _employeePositionService.AddPositionToEmployeeAsync(id, _mapper.Map<EmployeePosition>(employeePosition));
             if (newEmployeePosition == null)
             {
-                return NotFound();
+                return null;
             }
             return Ok(newEmployeePosition);
         }
@@ -99,7 +93,6 @@ namespace EmployeeManagement.API.Controllers
             return Ok(_mapper.Map<EmployeePositionDto>(employeePosition));
         }
 
-        // PUT api/<EmployeesController>/5/position/6
         [HttpPut("{empId}/position/{positionId}")]
         public async Task<IActionResult> UpdatePosition(int empId, int positionId, [FromBody] EmployeePositionPostModel employeePosition)
         {
@@ -111,7 +104,6 @@ namespace EmployeeManagement.API.Controllers
             return Ok(updateEmployeePosition);
         }
 
-        // DELETE api/<EmployeesController>/5/position/6
         [HttpDelete("{id}/position/{positionId}")]
         public async Task<IActionResult> DeletePosition(int id, int positionId)
         {
@@ -123,9 +115,6 @@ namespace EmployeeManagement.API.Controllers
             return Ok(result);
         }
 
-      
-
-     
 
     }
 }

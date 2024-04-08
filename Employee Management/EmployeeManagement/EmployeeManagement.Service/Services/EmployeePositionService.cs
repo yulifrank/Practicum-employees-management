@@ -19,9 +19,16 @@ namespace EmployeeManagement.Service.Services
 
         public async Task<EmployeePosition> AddPositionToEmployeeAsync(int code, EmployeePosition employeePosition)
         {
-            employeePosition.EmployeeId= code;
+            employeePosition.EmployeeId = code;
+
+            if (employeePosition.Employee!=null&&employeePosition.EntryDate < employeePosition.Employee.Birthdate)
+            {
+                return null;
+            }
+
             return await _employeePositionRepository.AddPositionToEmployeeAsync(employeePosition);
         }
+
         public async Task <EmployeePosition> GetEmployeePositionsByIdAsync(int employeeId, int positionId)
         {
             return await _employeePositionRepository.GetEmployeePositionsByIdAsync(employeeId, positionId);
@@ -38,6 +45,10 @@ namespace EmployeeManagement.Service.Services
 
         public async  Task<EmployeePosition> UpdatePositionToEmployeeAsync(int employeeId, int positionId, EmployeePosition employeePosition)
         {
+            if (employeePosition.Employee != null && employeePosition.EntryDate < employeePosition.Employee.Birthdate)
+            {
+                return null;
+            }
             return await _employeePositionRepository.UpdatePositionToEmployeeAsync(employeeId, positionId, employeePosition);
         }
     }

@@ -4,11 +4,10 @@
         {{employee.firstName}}
         {{employee.lastName}}
         {{positionName}}
-    
     </div>
   <form *ngIf="employeePosition" [formGroup]="EditPositionEmployeeForm" class="form">
     <div class="form-row">
-        <mat-label>סוג משרה:</mat-label>
+        <mat-label>סוג תפקיד:</mat-label>
       <mat-form-field class="custom-field">
         <mat-select formControlName="isManagement" class="custom-select">
           <mat-option [value]="true">ניהולי</mat-option>
@@ -16,10 +15,8 @@
         </mat-select>
       </mat-form-field>
     </div>
-
     <div class="form-row">
-        <mat-label>תאריך כניסה למשרה</mat-label>
-
+        <mat-label>תאריך כניסה לתפקיד</mat-label>
       <mat-form-field class="custom-field">
         <input matInput [matDatepicker]="picker1" formControlName="entryDate" placeholder="בחר תאריך כניסה לעבודה" class="custom-input">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>

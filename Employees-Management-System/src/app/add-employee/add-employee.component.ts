@@ -9,13 +9,13 @@ import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker
 import { MatNativeDateModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../employee.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Route, Router } from '@angular/router';
-import { MatIcon, MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -25,21 +25,8 @@ import { MatStepperModule } from '@angular/material/stepper';
   selector: 'app-add-employee',
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatNativeDateModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatDividerModule,
-    MatStepperModule
+    CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatNativeDateModule,MatCheckboxModule,MatFormFieldModule,
+    MatDatepickerModule, MatSelectModule, MatSnackBarModule, MatIconModule, MatTooltipModule, MatDividerModule, MatStepperModule
   ],
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss']

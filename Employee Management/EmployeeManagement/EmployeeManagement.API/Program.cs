@@ -25,7 +25,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeePositionRepository, EmployeePositionRepository>();
 builder.Services.AddScoped<IPositionRepository, PositionRepository>();
-
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeePositionService, EmployeePositionService>();
 builder.Services.AddScoped<IPositionService, PositionService>();

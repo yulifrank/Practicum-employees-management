@@ -1,37 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../Models/employee.model';
 import { EmployeeService } from '../employee.service';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar'; // ייבוא של MatToolbarModule
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import * as XLSX from 'xlsx'; // ייבוא ספריית xlsx לייצוא לקובץ אקסל
-import { saveAs } from 'file-saver'; // ייבוא פונקציה saveAs מספריית file-saver
 import { DialogComponent } from '../dialog/dialog.component';
-import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { PositionsComponent } from '../positions/positions.component';
 import { FilterService } from '../filter.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MatFormFieldModule, MatTableModule, CommonModule, MatTooltip],
+  imports: [MatToolbarModule, MatIconModule, MatFormFieldModule, MatTableModule, CommonModule, MatTooltip,MatProgressSpinnerModule,],
   templateUrl: './employees-list.component.html',
   styleUrls: ['./employees-list.component.scss']
 })
 export class EmployeesListComponent implements OnInit {
   columnsToDisplay: string[] = ['firstName', 'lastName', 'identity', 'birthdate', 'actions'];
   employees: MatTableDataSource<Employee>;
-
-  filteredEmployees: Employee[] = []; // Initialize filteredEmployees array
+  hasItems: boolean = false;
+  filteredEmployees: Employee[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -45,86 +40,44 @@ export class EmployeesListComponent implements OnInit {
     this.filterService.filteredEmployees$.subscribe(filteredEmployees => {
       this.filteredEmployees = filteredEmployees;
       this.employees = new MatTableDataSource<Employee>(this.filteredEmployees);
+      this.hasItems = this.filteredEmployees.length > 0;
     });
   }
-  
+
   getEmployees(): void {
     this.employeeService.getEmployees().subscribe(employees => {
       this.employees = new MatTableDataSource<Employee>(employees);
+      this.hasItems = employees.length > 0;
     });
   }
 
-  openAddEmployeeDialog(): void {
-    const dialogRef = this.dialog.open(AddEmployeeComponent, {
-      width: '50%',
-      height: '70%',
-    });
-
-    dialogRef.afterClosed().subscribe(formData => {
-      if (formData) {
-        console.log('Form data:', formData);
-      } else {
-        console.log('Dialog closed without form data');
-      }
-    });
-    this.getEmployees();
-
-
-  }
   deleteEmployee(employee: Employee): void {
-    console.log(employee.code)
-
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '350px',
-      data: { errorMessage: 'האם ברצונך למחוק את ?' + employee.firstName + " " + employee.lastName }
+      data: { errorMessage: ' ?האם הינך רוצה למחוק את ' + employee.firstName + " " + employee.lastName }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
-        this.employeeService.deleteEmployee(employee.code)
-          .subscribe(() => {
-            this.getEmployees();
-          });
+        this.employeeService.deleteEmployee(employee.code).subscribe(() => {
+          this.getEmployees(); // Refresh data after deletion
+        });
       }
     });
   }
+
   editEmployee(employeeId: number): void {
     console.log('Editing employee:', employeeId);
     this.router.navigate(['/edit-employee', employeeId]);
   }
-  applyFilter(event: KeyboardEvent) {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.employees.filter = filterValue;
-  }
-  downloadData() {
-    const data: any[] = this.employees.filteredData.map((employee: Employee) => {
-      return {
-        'שם פרטי': { v: employee.firstName, t: 's', s: { alignment: { horizontal: 'right' } } },
-        'שם משפחה': { v: employee.lastName, t: 's', s: { alignment: { horizontal: 'right' } } },
-        'תעודת זהות': { v: employee.identity, t: 's', s: { alignment: { horizontal: 'right' } } },
-        'תאריך לידה': { v: employee.birthdate, t: 's', s: { alignment: { horizontal: 'right' } } }
-      };
-    });
-  
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-  
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-    saveAs(blob, 'employees.xlsx');
-  }
-  
-  openPositionDialog() {
-
+  openPositionDialog(): void {
     const dialogRef = this.dialog.open(PositionsComponent, {
       width: '60%',
       height: '70%',
     });
 
-    dialogRef.afterClosed().subscribe(result => 
-      {
+    dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
-      };})
-
+      }
+    });
   }
 }
