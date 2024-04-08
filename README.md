@@ -2,7 +2,7 @@
 This project is an Employee Management System developed using .NET and Angular.
 
 Overview
-The Employee Management System is designed to help businesses efficiently manage their employees' data including personal information, work history, and positions. The system allows administrators to add, edit, and delete employee records, as well as assign and manage employee positions.
+The Employee Management System is designed to help businesses efficiently manage their employees' data including personal information, works, and positions. The system allows administrators to add, edit, and delete employee records, as well as assign and manage employee positions.
 
 ## Features
 
