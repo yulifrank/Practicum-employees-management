@@ -28,7 +28,6 @@ namespace EmployeeManagement.Service.Services
                 employee.EmploymentStartDate < employee.Birthdate ||
                 existingEmployees.Any(e => e.Identity == employee.Identity&& e.IsActive))
             {
-                await Console.Out.WriteLineAsync(   "founddddddddddd");
                 return null;
             }
 

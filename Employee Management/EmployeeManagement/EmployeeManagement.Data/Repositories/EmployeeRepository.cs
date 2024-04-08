@@ -31,7 +31,6 @@ namespace EmployeeManagement.Data.Repositories
             var existingEmployee = await _context.Employees.FirstOrDefaultAsync(x => x.Identity == employee.Identity);
             if (existingEmployee != null )
             {
-                await Console.Out.WriteLineAsync(   "ששונה מbbbbbbb");
                 return await UpdateEmployeeAsync(existingEmployee.Code, employee);
              
             }
