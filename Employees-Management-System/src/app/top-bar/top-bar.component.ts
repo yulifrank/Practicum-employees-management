@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx'; 
 import { saveAs } from 'file-saver'; 
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-top-bar',
@@ -63,6 +64,16 @@ import { saveAs } from 'file-saver';
 
 
   downloadData() {
+    if ( this.employees ==null) 
+    {
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '350px',
+        data: { errorMessage:"...אין מספיק נתונים להוריד "}
+      });
+      dialogRef.afterClosed().subscribe()
+
+       }
+    else{
     const data: any[] = this.employees.filteredData.map((employee: Employee) => {
       return {
         'שם פרטי': { v: employee.firstName, t: 's', s: { alignment: { horizontal: 'right' } } },
@@ -79,6 +90,8 @@ import { saveAs } from 'file-saver';
     const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
     saveAs(blob, 'employees.xlsx');
   }
+  }
+  
   
   openPositionDialog() {
 
